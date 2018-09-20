@@ -1,0 +1,120 @@
+<ion-view title="Edit" cache-view="false" ng-class="bgClass">
+
+
+  <ion-nav-buttons side="left" scroll="false" class="has-header">
+    <button class="button button-assertive icon ion-ios-arrow-back" ng-click="userAction(null,'back',null)"> back</button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right" scroll="false" class="has-header">
+    <button class="button button-positive icon ion-compose" ng-click="editNote($event)" ng-show="app.resource.type!='note'"> note</button>
+  </ion-nav-buttons>
+
+
+
+  <!-- LOCATIONS -->
+  <div class="bar bar-subheader has-header" ng-show="app.resource.type=='locations'">
+    <h2 class="title">
+      <i class="icon ion-ios-location"></i>
+    </h2>
+  </div>
+
+  <!-- CAMERA -->
+  <div class="bar bar-subheader has-header" ng-show="app.resource.type=='camera'">
+    <div class="tabs tabs-icon-only">
+      <a class="tab-item">
+        <i class="icon ion-folder" ng-click="prepNewItem('a')"></i>
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-camera" ng-click="prepNewItem('p')"></i>
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-videocamera" ng-click="prepNewItem('v')"></i>
+      </a>
+    </div>
+
+  </div>
+
+
+  <div class="bar bar-subheader has-header" ng-show="app.resource.type=='dimension'">
+    <h2 class="title">
+      <i class="icon ion-code-working"></i>
+    </h2>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="bar bar-subheader has-header" ng-show="app.resource.type=='sketch'">
+    <div class="tabs tabs-icon-only">
+      <button class="button button-clear" style="color: #c0392b" ng-click="addText()">Aa</button>
+      <button class="button button-icon ion-paintbrush" ng-click="drawingMode()"></button>
+      <!-- ngIf: showColorPaletteIcon -->
+      <button class="button button-icon ion-android-color-palette" style="color: rgb(192, 57, 43);" ng-if="showColorPaletteIcon" ng-click="openColorsPopover($event)"></button>
+      <!-- end ngIf: showColorPaletteIcon -->
+      <button class="button button-icon ion-ios-undo" ng-click="undoLastObject()"></button>
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <ion-content padding="true" scroll="false" class="has-header">
+    <div class="spacer" style="height: 70px;"></div>
+
+    <div ng-show="app.resource.type=='note'">
+      <form class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Title" ng-model="pageData.title">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Desc" ng-model="pageData.desc">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Ref" ng-model="pageData.ref">
+        </label>
+        <label class="item item-input">
+
+          <input type="text" placeholder="Lat,Lon" ng-model="pageData.latlon1" disabled="true">
+
+          <input type="file" ng-show="false">
+          <button ng-click="prepGetLatlon('latlon1')" style="font-size:12px;" class="button button-positive button-clear">
+            <i class="icon ion-android-locate"></i>
+          </button>
+          <button ng-click="prepEditLatlon('latlon1')" style="font-size:12px;" class="button button-positive button-clear">
+            <i class="icon ion-edit"></i>
+          </button>
+        </label>
+        <label class="item" style="padding: 0px !important;">
+          <center>
+            <div style="align:center;">
+
+            </div>
+          </center>
+        </label>
+      </form>
+
+    </div>
+
+
+
+
+
+
+    <center>
+      <div id="imageArea" class="boxshadow"></div>
+      <div id="videoArea" class="boxshadow"></div>
+      <canvas id="canvasArea" class="boxshadow" ng-show="app.resource.type=='sketch'"></canvas>
+    </center>
+  </ion-content>
+</ion-view>
